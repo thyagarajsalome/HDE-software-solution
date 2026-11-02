@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f2f1ee;
+  --bg-raised: #faf9f7;
+  --bg-sunken: #e9e8e4;
+  --ink: #101014;
+  --ink-strong: #000000;
+  --muted: rgba(16, 16, 20, 0.65);
+  --faint: rgba(16, 16, 20, 0.42);
+  --line: rgba(16, 16, 20, 0.14);
+  --line-strong: rgba(16, 16, 20, 0.38);
+  --accent: #2d81ff;
+  --accent-ink: #1659c4;
+  --invert-bg: #101014;
+  --invert-fg: #f2f1ee;
+
+  --font-archivo: 'Archivo', system-ui, sans-serif;
+  --font-instrument: 'Instrument Serif', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+[data-theme="dark"], html.dark {
+  --bg: #0b0b0c;
+  --bg-raised: #141416;
+  --bg-sunken: #070708;
+  --ink: #f2f1ee;
+  --ink-strong: #ffffff;
+  --muted: rgba(242, 241, 238, 0.65);
+  --faint: rgba(242, 241, 238, 0.38);
+  --line: rgba(242, 241, 238, 0.12);
+  --line-strong: rgba(242, 241, 238, 0.28);
+  --accent: #3d8bff;
+  --accent-ink: #80b3ff;
+  --invert-bg: #f2f1ee;
+  --invert-fg: #101014;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-inter);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  /* Custom scrollbar matching ArtCraft */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 0;
+  }
+}
+
+/* Precision grid crosshair decorations */
+.corner-cross {
+  position: relative;
+}
+.corner-cross::before {
+  content: "+";
+  position: absolute;
+  top: -10px;
+  left: -8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--faint);
+  line-height: 1;
+}
+
+/* Pulsing radar dot */
+@keyframes radar-pulse {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  50% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+.radar-dot {
+  position: relative;
+}
+.radar-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: currentColor;
+  animation: radar-pulse 2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
